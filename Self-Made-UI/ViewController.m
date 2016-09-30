@@ -200,6 +200,7 @@
         CGContextRef context = UIGraphicsGetCurrentContext();
         [_scrollView.layer renderInContext:context];
         //获取渲染好的图像
+        
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         //平移绘制后的图像resultImg，开启clipView大小的上下文
