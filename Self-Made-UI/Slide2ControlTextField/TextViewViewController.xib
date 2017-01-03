@@ -34,8 +34,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Gc-0L-vph" userLabel="square">
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="27" id="C0N-yA-afV"/>
-                                <constraint firstAttribute="width" constant="21" id="cNQ-al-Cde"/>
+                                <constraint firstAttribute="height" constant="40" id="C0N-yA-afV"/>
+                                <constraint firstAttribute="width" constant="60" id="cNQ-al-Cde"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -49,12 +49,12 @@
                         <constraint firstItem="yeO-ID-ad9" firstAttribute="centerY" secondItem="f9F-Hm-3wV" secondAttribute="centerY" id="n1I-we-J2E"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="扩大是佛dsaf" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fck-Um-mIj">
+                <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fck-Um-mIj">
                     <constraints>
                         <constraint firstAttribute="width" constant="290" id="Yzn-aG-r32"/>
                         <constraint firstAttribute="height" constant="30" id="gN2-QS-vOc"/>
                     </constraints>
-                    <nil key="textColor"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>

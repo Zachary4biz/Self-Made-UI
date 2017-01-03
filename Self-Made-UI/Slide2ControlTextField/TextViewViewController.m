@@ -75,7 +75,10 @@
     [self.square addGestureRecognizer:aDoubleTapGesture];
     
     //双击后单击跳到开头、结尾
-    
+    UITapGestureRecognizer *aTapAfterDoubleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAfterDoubleTap:)];
+    //这句很重要
+    [aTapAfterDoubleTapGesture requireGestureRecognizerToFail:aDoubleTapGesture];
+    [self.square addGestureRecognizer:aTapAfterDoubleTapGesture];
     
     //长按选择
     UILongPressGestureRecognizer *aLongPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
@@ -85,13 +88,16 @@
     //初始化originalX
     self.squareOriginalX = self.square.frame.origin.x;
     self.textField.delegate = self;
-    self.textField.text = @"begin-----------a;sdjlkfhc阿斯兰的；开飞机离开；差距暗室逢灯；拉三等奖iuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiads*************end";
-    
-//    [[SetUpAboutKeyboard alloc]initWithPreparation4KeyboardWithVC:self andLiftTheViews:@[self.textField]];
+//    self.textField.text = @"begin-----------a;sdjlkfhc阿斯兰的；开飞机离开；差距暗室逢灯；拉三等奖iuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiads*************end测试中文";
+    self.textField.text = @"begin-------a;sdjlkfhc阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的";
+    [[SetUpAboutKeyboard alloc]initWithPreparation4KeyboardWithVC:self andLiftTheViews:nil];
     
     //初始化队列
     self.moveRightQueue = [[NSOperationQueue alloc]init];
     self.moveLeftQueue = [[NSOperationQueue alloc]init];
+    
+    
+    
     
 }
 
@@ -189,9 +195,54 @@ static CGFloat plusVar = 0.0;
 }
 
 #pragma mark DoubleTap手势
+//这两个是判断在双击全选之前，光标是在文本开头还是在文本末尾处
+static int isHeadOfText = 0;
+static int isTailOfText = 0;
 - (void)doubleTap:(UITapGestureRecognizer *)aDoubleTap
 {
-    self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.beginningOfDocument toPosition:self.textField.endOfDocument];
+    //开始选中前光标距离文本末尾的offset
+    NSInteger offset2End = [self.textField offsetFromPosition:self.textField.selectedTextRange.start
+                                                   toPosition:self.textField.endOfDocument];
+    if (offset2End == 0) {
+        //光标在末尾
+        isTailOfText = 1;
+    }else if(offset2End == [self.textField offsetFromPosition:self.textField.beginningOfDocument
+                                                   toPosition:self.textField.endOfDocument])
+    {
+        //光标在开头
+        isHeadOfText = 1;
+    }
+    //选中范围设置为全文
+    self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.beginningOfDocument
+                                                                  toPosition:self.textField.endOfDocument];
+    
+}
+#pragma mark DoubleTap&Tap 手势
+- (void)tapAfterDoubleTap:(UITapGestureRecognizer *)aTap
+{
+    //文字总的长度
+    NSInteger totalOffset = [self.textField offsetFromPosition:self.textField.beginningOfDocument
+                                                    toPosition:self.textField.endOfDocument];
+    //当前选中的文字长度
+    NSInteger currentOffset = [self.textField offsetFromPosition:self.textField.selectedTextRange.start
+                                                      toPosition:self.textField.selectedTextRange.end];
+    if(totalOffset == currentOffset){
+        //表示是已经双击选中过了
+        if (isHeadOfText) {
+            //双击前，光标在开头，那么现在就让光标去末尾
+            self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.endOfDocument
+                                                                          toPosition:self.textField.endOfDocument];
+            //并重置
+            isHeadOfText = 0;
+        }else if (isTailOfText){
+            //双击前，光标在末尾，现在就让光标去开头
+            self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.beginningOfDocument
+                                                                          toPosition:self.textField.beginningOfDocument];
+            //并重置
+            isTailOfText = 0;
+        }
+    }
+    
 }
 #pragma mark Pan手势
 static CGFloat recorder4SquareOffsetChange = 0.0;
@@ -293,7 +344,31 @@ static int num4Increase = 1;
     }
     
 }
-
+#pragma mark 检测是否有中文
+- (BOOL)isContainChineseCharacter:(NSString *)Str
+{
+    for (int i=0; i<[Str length]; i++) {
+        int a = [Str characterAtIndex:i];
+        if (a>0x4e00 && a<0x9fff) {
+            return YES;
+        }
+    }
+    return NO;
+}
+#pragma mark UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    UIScrollView *theEditorView;
+    if ([self isContainChineseCharacter:textField.text]) {
+        for (UIScrollView *view in textField.subviews)
+        {
+            if ([view class] == NSClassFromString(@"UIFieldEditor")) {
+                theEditorView = view;
+            }
+        }
+    }
+    theEditorView.contentOffset = CGPointMake(0, 3);
+}
 - (void)textDidChange:(id<UITextInput>)textInput
 {
     
@@ -307,6 +382,7 @@ static CGRect firstRectForRange;
     NSLog(@"caretRectForPosition:%@",NSStringFromCGRect(caretRectForPosition));
     NSLog(@"firstRectForRange:%@",NSStringFromCGRect(firstRectForRange));
     return YES;
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

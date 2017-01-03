@@ -27,6 +27,7 @@
 		B68FC6441D990FDD00822473 /* TabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B68FC6431D990FDC00822473 /* TabBar.m */; };
 		B68FC6471D99158A00822473 /* RopinessPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = B68FC6461D99158A00822473 /* RopinessPointView.m */; };
 		B68FC64F1D99694200822473 /* ScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = B68FC64E1D99694200822473 /* ScreenShot.m */; };
+		B6A884A51E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */; };
 		B6E5C8F21E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F11E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m */; };
 		B6E5C8F51E14136F004F8635 /* SlideControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F41E14136F004F8635 /* SlideControllerView.m */; };
 		B6E5C8F91E14B195004F8635 /* TextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F71E14B195004F8635 /* TextViewViewController.m */; };
@@ -81,6 +82,8 @@
 		B68FC6461D99158A00822473 /* RopinessPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RopinessPointView.m; sourceTree = "<group>"; };
 		B68FC64D1D99694200822473 /* ScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenShot.h; sourceTree = "<group>"; };
 		B68FC64E1D99694200822473 /* ScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenShot.m; sourceTree = "<group>"; };
+		B6A884A31E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixChineseCharacterOffsetTextField.h; sourceTree = "<group>"; };
+		B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixChineseCharacterOffsetTextField.m; sourceTree = "<group>"; };
 		B6E5C8F01E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewControllerOnSlide2ControlTextField.h; sourceTree = "<group>"; };
 		B6E5C8F11E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewControllerOnSlide2ControlTextField.m; sourceTree = "<group>"; };
 		B6E5C8F31E14136F004F8635 /* SlideControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideControllerView.h; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 				B6E5C8F61E14B195004F8635 /* TextViewViewController.h */,
 				B6E5C8F71E14B195004F8635 /* TextViewViewController.m */,
 				B6E5C8F81E14B195004F8635 /* TextViewViewController.xib */,
+				B6A884A31E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.h */,
+				B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */,
 			);
 			path = Slide2ControlTextField;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6EA7E061DD15E9100EBDF72 /* SecondViewController.m in Sources */,
+				B6A884A51E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m in Sources */,
 				B68FC5F01D94D46700822473 /* ViewController.m in Sources */,
 				B6E780D01E15027F00C37950 /* SetUpAboutKeyboard.m in Sources */,
 				B68FC6031D94D47700822473 /* DownloadProgressView.m in Sources */,
