@@ -36,7 +36,7 @@
 {
     if (!_shapeLayer) {
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-#warning __birdge  ownership....//shapeLayer.fillColor = self.backgroundColor;
+#warning DIffrence ??__birdge  ownership....//shapeLayer.fillColor = self.backgroundColor;
         shapeLayer.fillColor = self.backgroundColor.CGColor;
         [self.superview.layer insertSublayer:shapeLayer below:self.layer];
         _shapeLayer = shapeLayer;
@@ -91,7 +91,7 @@
     center.y += translation.y;
     self.center = center;
     
-#warning 可以用另一个变量记录translation，代替distanceWithPointA: andPointB:吗？
+//#warning 可以用另一个变量记录translation，代替distanceWithPointA: andPointB:吗？
 //不可以，因为如果拖了两次，但两次都没有超出MaxDistance，那会把前一次的累加到第二次上
 //    _x4translation += translation.x;
 //    _y4translation += translation.y;
@@ -110,7 +110,7 @@
         currentRadius = 0;
     }
     _pointView.bounds = CGRectMake(0, 0, currentRadius*2, currentRadius*2);
-#warning 源码是self.pointView
+
     _pointView.layer.cornerRadius = currentRadius;
     //绘图
     if (pointDistance > MaxDistance) {
@@ -166,6 +166,7 @@
         else
         {
             //没超过最大距离，回弹
+            _pointView.hidden = YES;
             [self.shapeLayer removeFromSuperlayer];
             self.shapeLayer=nil;
             [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.2 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{

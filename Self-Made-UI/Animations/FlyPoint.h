@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 @interface FlyPoint : NSObject
 
-+(CAAnimationGroup *)getRandomAnimationWithRectView:(UIView *)view;
++(CAAnimationGroup *)getRandomAnimationWithRectView:(UIView *)view andMaxofscale:(int)scaleMax rotation:(int)rotationMax x:(int)xMax y:(int)yMax color:(UIColor*)color;
 @end

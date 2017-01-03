@@ -19,8 +19,8 @@
 */
 -(void)awakeFromNib
 {
-    CGRect frame4scrollView = [UIScreen mainScreen].bounds;
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:frame4scrollView];
+//    CGRect frame4scrollView = [UIScreen mainScreen].bounds;
+//    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:frame4scrollView];
 
 //     _factor = MIN(1, MAX(0, (ABS(scrollView.contentOffset.x - self.lastContentOffset) / scrollView.frame.size.width)));
 }

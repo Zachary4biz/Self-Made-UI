@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MyTabBarController.h"
+#import "TestViewControllerOnSlide2ControlTextField.h"
+#import "TextViewViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -18,11 +20,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    ViewController *rootVC = [[ViewController alloc]init];
-//    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:rootVC];
-//    self.window.rootViewController = naVC;
-//    
-//    [self.window makeKeyAndVisible];
+    //创建窗口
+    self.window = [[UIWindow alloc]init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    
+    //2.指定根控制器
+//    self.window.rootViewController = [[MyTabBarController alloc]init];
+//    self.window.rootViewController = [[TestViewControllerOnSlide2ControlTextField alloc]init];
+    self.window.rootViewController = [[TextViewViewController alloc]init];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

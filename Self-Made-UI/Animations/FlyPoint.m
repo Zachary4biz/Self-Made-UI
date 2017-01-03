@@ -39,18 +39,18 @@
     [_timer setFireDate:[NSDate distantFuture]];
 }
 */
-+(CAAnimationGroup *)getRandomAnimationWithRectView:(UIView *)view
++(CAAnimationGroup *)getRandomAnimationWithRectView:(UIView *)view andMaxofscale:(int)scaleMax rotation:(int)rotationMax x:(int)xMax y:(int)yMax color:(UIColor *)colorMax
 {
 //scale动画容易让这个view变小到消失，还是不用了
 
-        float scaleRandom  =((1.0 * arc4random_uniform(200)+10)/100);
+        float scaleRandom  =((1.0 * arc4random_uniform(scaleMax*100)+10)/100);
 //    NSLog(@"%f",scaleRandom);
     scaleRandom =  [[NSString stringWithFormat:@"%.3f",scaleRandom] floatValue];
-    int rotationRandom = (arc4random_uniform(M_PI*2)+M_PI_2);
-    CGPoint positionRandom = CGPointMake((arc4random_uniform(80)+view.frame.origin.x), (arc4random_uniform(200)+view.frame.origin.y));
-    int cornerRadiusRandom = scaleRandom*view.frame.size.width;
+    int rotationRandom = (arc4random_uniform(M_PI*rotationMax)+M_PI_2);
+    CGPoint positionRandom = CGPointMake((arc4random_uniform(xMax)+view.frame.origin.x), (arc4random_uniform(yMax)+view.frame.origin.y));
+    int cornerRadiusRandom = scaleRandom*view.frame.size.width*((50+arc4random_uniform(50))/100.0);
 //    int cornerRadiusRandom = (arc4random_uniform(view.frame.size.width)+1);
-    CGColorRef colorRandom = [[UIColor colorWithRed:arc4random_uniform(255)/256.0 green:arc4random_uniform(255)/256.0 blue:arc4random_uniform(255)/256.0 alpha:(arc4random_uniform(1)/1.0 + 0.3)] CGColor];
+    CGColorRef colorRandom = [colorMax CGColor];
     
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     
@@ -77,10 +77,10 @@
     animationGroup.animations = @[scale,rotation,position,cornerRadius,color];
 
     //写在这里无效，要写在addAnimation前面
-//    //动画完成时不移除
-//    animationGroup.removedOnCompletion = NO;
-//    //动画执行完成要保持最新的动画效果
-//    animationGroup.fillMode = kCAFillModeForwards;
+    //动画完成时不移除
+    animationGroup.removedOnCompletion = NO;
+    //动画执行完成要保持最新的动画效果
+    animationGroup.fillMode = kCAFillModeForwards;
 #pragma mark 设置代理
     //设置代理
 //    animationGroup.delegate = self;//设置接受这个方法的那个类里面吧
