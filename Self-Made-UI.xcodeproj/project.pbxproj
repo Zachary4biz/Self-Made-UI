@@ -153,8 +153,8 @@
 		B68FC5E71D94D46700822473 /* Self-Made-UI */ = {
 			isa = PBXGroup;
 			children = (
+				B6E5C8EE1E140CD9004F8635 /* Slide2ControlTextField */,
 				B6E780CD1E15027000C37950 /* 键盘控制 */,
-				B6E5C8EF1E140CDE004F8635 /* 滑动条来控制光标 */,
 				B63BDFAB1DF124850086778F /* AutoHeightTextView */,
 				B6EEE7BA1DAFC6450045C8C8 /* AlbumCollectionView */,
 				B6E7F2D51DA9316C00BBCA14 /* LoadingView */,
@@ -282,14 +282,6 @@
 				B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */,
 			);
 			path = Slide2ControlTextField;
-			sourceTree = "<group>";
-		};
-		B6E5C8EF1E140CDE004F8635 /* 滑动条来控制光标 */ = {
-			isa = PBXGroup;
-			children = (
-				B6E5C8EE1E140CD9004F8635 /* Slide2ControlTextField */,
-			);
-			name = "滑动条来控制光标";
 			sourceTree = "<group>";
 		};
 		B6E780CD1E15027000C37950 /* 键盘控制 */ = {
