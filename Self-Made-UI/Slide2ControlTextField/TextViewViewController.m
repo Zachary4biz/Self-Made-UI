@@ -34,6 +34,9 @@
 
 @property (nonatomic, strong) NSTimer *moveLeftTimer;
 @property (nonatomic, strong) NSTimer *moveRightTimer;
+
+@property (nonatomic, strong) NSTimer *selectLeftTimer;
+@property (nonatomic, strong) NSTimer *selectRightTimer;
 @end
 
 @implementation TextViewViewController
@@ -59,6 +62,7 @@
     }
     return _moveRightTimer;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -88,8 +92,8 @@
     //初始化originalX
     self.squareOriginalX = self.square.frame.origin.x;
     self.textField.delegate = self;
-//    self.textField.text = @"begin-----------a;sdjlkfhc阿斯兰的；开飞机离开；差距暗室逢灯；拉三等奖iuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiads*************end测试中文";
-    self.textField.text = @"begin-------a;sdjlkfhc阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的";
+    self.textField.text = @"begin-----------a;sdjlkfhc阿斯兰的；开飞机离开；差距暗室逢灯；拉三等奖iuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwibshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiuhgkjzgviuxcfgadsa;sdjlkfhcxuizviuabshjekgqwiads*************end测试中文";
+//    self.textField.text = @"begin-------a;sdjlkfhc阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的阿斯兰的";
     [[SetUpAboutKeyboard alloc]initWithPreparation4KeyboardWithVC:self andLiftTheViews:nil];
     
     //初始化队列
@@ -113,37 +117,148 @@
     });
 }
 #pragma mark LongPress手势
-static CGFloat recorder4LongPressOffset = 0.0;
-//初始化一个变量用来累每次增加的选择offset
-static CGFloat plusVar = 0.0;
+
+//这个用来记录自动右移和自动左移
+static float recorder4AutoSelectionRight;
+static float recorder4AutoSelectionLeft;
+static int increasement4AutoSelection = 1;
+static float log4AutoSelection = 1.2;
+/*
+ *这个是记录一下移动到哪里了，方便作为后面自动位移的基数来不停地加
+ *不然这样写有问题：self.square.transform.tx + (int)(log(recorder4AutoSelectionRight)/log(log4AutoSelection))
+ *导致offset每次增加的是 增量 的 增加量，比如增量依次是1 2 3 4 5 6 ，我希望的其实是offset每次增加1 2 3 4 5 6，结果是每次都只增加了1
+ */
+static float currentOffsetInTransform = 0;
+/*
+ *从自动选择（自动移动光标）的状态中出来，如果没有松开手，而是直接通过往回拖了一下滑块的方式
+ *这时候是希望从当前选中的地方稍微往回来一个两个字符
+ *而老的逻辑中做不到，因为如果直接往回就进入到了最开始的if判断中，直接用transform.tx作为offset来用了，显然不对
+ *这时候应该用transform.tx的改变量来当做增量，加到现在的offset上，
+ *所以用 isTransformAfterAutoSelection 判断是否是从自动状态出来的，以及从左移还是右移出来
+ * （错）用 recorder4TransformX 来记录从而通过 transform.tx - recorder 得到transform的增量（错）
+ *上面那句不对，因为这个拿来减的recorder初始不是0，而是根据从自动左移结束还是右移来判断它初始是最左边还是最右边
+ *最左边（最负的）和最右边（最正的）的transform.tx不好直接初始化出来，那就在if elseif里面的开启timer时记录一下
+ */
+static int isTransformAfterAutoSelection = 0;
+static CGFloat recorder4TransformX = 0;
+static CGFloat recorder4MaxLeftTransformX = 0;
+static CGFloat recorder4MaxRightTransformX = 0;
 - (void)longPress:(UILongPressGestureRecognizer *)aLongPress
 {
     if (aLongPress.state == UIGestureRecognizerStateBegan) {
         NSLog(@"开始长按");
         self.slideBar.backgroundColor = [UIColor cyanColor];
     }else if (aLongPress.state == UIGestureRecognizerStateChanged){
-        
+        NSLog(@"self.square.frame -- %@",NSStringFromCGRect(self.square.frame));
         CGPoint gesturePoint = [aLongPress locationInView:self.slideBar];
         NSLog(@"gesturePoint-longPress-location- %@",NSStringFromCGPoint(gesturePoint));
-        if (gesturePoint.x>0 && gesturePoint.x<self.slideBar.frame.size.width) {
+        //当前选中的offset
+        NSInteger currentSelectedOffset = [self.textField offsetFromPosition:self.textField.selectedTextRange.start toPosition:self.textField.selectedTextRange.end];
+        NSLog(@"当前选中量是%ld",currentSelectedOffset);
+        if (gesturePoint.x>0+0.5*self.square.frame.size.width && gesturePoint.x<self.slideBar.frame.size.width-0.5*self.square.frame.size.width) {
             self.square.transform = CGAffineTransformMakeTranslation(gesturePoint.x-self.square.center.x, 0);
-            [self makeSelectionWithOffset:self.square.transform.tx];
+            //将要发生的offset（来自滑块的位移），要判断一下是直接使用还是加上当前选中的offset后再用
+            NSInteger willOffset = self.square.transform.tx;
+            //记录一下transform
+            recorder4TransformX = self.square.transform.tx;
+            if (isTransformAfterAutoSelection == 1) {
+                //如果是从自动移动状态结束了，没有松开手，而是直接又移动（往中间移）了滑块
+//                willOffset += willOffset>0?currentSelectedOffset:-currentSelectedOffset;
+                NSLog(@"从自动状态（左移）结束来到第一个if进行transform");
+                NSInteger deltaOffset = self.square.transform.tx - recorder4MaxLeftTransformX;
+                NSLog(@"变化量是%lf",self.square.transform.tx - recorder4MaxLeftTransformX);
+                
+                self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.selectedTextRange.end
+                                                                               toPosition:[self.textField positionFromPosition:self.textField.selectedTextRange.start
+                                                                                                                        offset:-deltaOffset+currentSelectedOffset]];
+            }else if (isTransformAfterAutoSelection == 2){
+                /*
+                NSLog(@"从自动状态（右移）结束来到第一个if进行transform");
+                NSInteger deltaOffset = self.square.transform.tx - recorder4MaxRightTransformX;
+                NSLog(@"变化量是%lf",self.square.transform.tx - recorder4MaxRightTransformX);
+                self.textField.selectedTextRange = [self.textField textRangeFromPosition:self.textField.selectedTextRange.start
+                                                                              toPosition:[self.textField positionFromPosition:self.textField.selectedTextRange.start
+                                                                                                                       offset:deltaOffset+currentSelectedOffset]];
+                 */
+                /*
+                 *非常舒服的是自动右移是系统做好了的
+                 */
+            }else{
+                //这就是正常情况下的拖动，直接用这个transform.tx当offset就行了
+                [self makeSelectionWithOffset:willOffset];
+            }
+            
+            //这个是记录一下移动到哪里了，方便作为后面自动位移的基数来不停地加
+            currentOffsetInTransform = self.square.transform.tx;
+        }else if (gesturePoint.x <= 5){
+            //移到了slideBar的左边，表示要自动左移了，其实5还没有到左边，但是相当于滤波一下吧
+            //记录一下最左边的时候transform是什么
+            recorder4MaxLeftTransformX = self.square.transform.tx;
+            NSLog(@"最左边的transform.tx是%lf",recorder4MaxLeftTransformX);
+            if (!self.selectLeftTimer) {
+                self.selectLeftTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 repeats:YES block:^(NSTimer * _Nonnull timer) {
+                    if (self.square.frame.origin.x <= 5) {
+                        recorder4AutoSelectionLeft += increasement4AutoSelection;
+                        //每次都加这个增量
+                        currentOffsetInTransform += -(int)(log(recorder4AutoSelectionLeft)/log(log4AutoSelection));
+                        [self makeSelectionWithOffset:currentOffsetInTransform];
+                    }else{
+                        NSLog(@"结束Timer");
+                        [self.selectLeftTimer invalidate];
+                        self.selectLeftTimer = nil;
+                        //这个是标记一下现在状态是从自动移动中结束出来的 1表示自动左移
+                        isTransformAfterAutoSelection = 1;
+                        //重置
+                        recorder4AutoSelectionLeft = 0.0;
+                        //重置currentOffsetInTransform
+                        currentOffsetInTransform = self.square.transform.tx;
+                        
+                    }
+                }];
+            }
+        }else if (gesturePoint.x>self.slideBar.frame.size.width-5){
+            //移到了slideBar的右边，表示要自动右移了，用5滤波一下
+            //记录一下最右边的时候transform是什么
+            recorder4MaxRightTransformX = self.square.transform.tx;
+            NSLog(@"最右边的transform.tx是%lf",recorder4MaxRightTransformX);
+            if (!self.selectRightTimer) {
+                NSLog(@"手势点是--%lf",gesturePoint.x);
+                self.selectRightTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 repeats:YES block:^(NSTimer * _Nonnull timer) {
+                    if (self.square.frame.origin.x>self.slideBar.frame.size.width-self.square.frame.size.width-5) {
+                        recorder4AutoSelectionRight += increasement4AutoSelection;
+                        currentOffsetInTransform += (int)(log(recorder4AutoSelectionRight)/log(log4AutoSelection));
+                        [self makeSelectionWithOffset:currentOffsetInTransform];
+                    }else{
+                        NSLog(@"结束Timer");
+                        [self.selectRightTimer invalidate];
+                        self.selectRightTimer = nil;
+                        //这个是标记一下现在状态是从自动移动中结束出来的， 2表示自动右移
+                        isTransformAfterAutoSelection = 2;
+                        //重置
+                        recorder4AutoSelectionLeft = 0.0;
+                        //重置currentOffsetInTransform
+                        currentOffsetInTransform = self.square.transform.tx;
+                        
+                    }
+                }];
+            }
         }
     }
     if (aLongPress.state == UIGestureRecognizerStateEnded) {
         [UIView animateWithDuration:0.2 animations:^{
             self.square.transform = CGAffineTransformIdentity;
         }];
-        recorder4LongPressOffset = 0.0;
-        plusVar = 0.0;
         self.slideBar.backgroundColor = [UIColor lightGrayColor];
         NSLog(@"结束长按");
+        //重置
+        isTransformAfterAutoSelection = 0;
     }
 }
 
 #pragma mark 移动选择方法
 - (void)makeSelectionWithOffset:(NSInteger)aOffset
 {
+//    NSLog(@"aOffset--%ld",aOffset);
     //起始点
     UITextPosition *selectionBeginPosition;
     UITextPosition *targetPosition;
@@ -156,42 +271,44 @@ static CGFloat plusVar = 0.0;
         NSInteger targetOffset2End = [self.textField offsetFromPosition:targetPosition toPosition:self.textField.endOfDocument];
         //当前距离末尾还有多少个字符
         NSInteger currentRemainOffset2End = [self.textField offsetFromPosition:self.textField.selectedTextRange.start toPosition:self.textField.endOfDocument];
-        if (targetOffset2End > currentRemainOffset2End ) {
+        if (targetOffset2End >= currentRemainOffset2End ) {
             //如果预计移动后距离末尾字符数大于现在还剩下的，说明超过了尾巴，修改targetPosition为末尾就好了
             targetPosition = self.textField.endOfDocument;
         }
+        
+
     }else{
         //向左边移不用管，系统默认移动到最左边也不会到textField的末尾处
         //但是起始点就变了，向左选择，起始点应该是右边的.end
+//        NSLog(@"左移%ld个",aOffset);
         selectionBeginPosition = self.textField.selectedTextRange.end;
         targetPosition = [self.textField positionFromPosition:selectionBeginPosition offset:aOffset];
     }
     self.textField.selectedTextRange = [self.textField textRangeFromPosition:selectionBeginPosition
                                                                   toPosition:targetPosition];
     
-    NSString *selectedStr2BeginOfDocument = [self.textField textInRange:[self.textField textRangeFromPosition:self.textField.beginningOfDocument toPosition:targetPosition]];
-    
-    NSLog(@"%@",selectedStr2BeginOfDocument);
-#warning 这里用sizeWithFont应该可以高出这个字符串的长度才对
-    CGSize strSize = [selectedStr2BeginOfDocument sizeWithAttributes:@{NSFontAttributeName:self.textField.font}];
-    NSLog(@"文字size%@",NSStringFromCGSize(strSize));
-    /*
-     *!!!!!
-     */
-    //向右边选择文字会出现field不会自动右移的情况
-    UIScrollView *theUIFieldEditorContentView;
-    for (id i in self.textField.subviews)
-    {
-        if ([i class] == NSClassFromString(@"UIFieldEditor")) {
-            theUIFieldEditorContentView = i;
+    if (aOffset>0) {
+        /*
+         *这里特意放在selectedTextRange修改后再来修改UIFieldEditor的偏移量
+         *不然SelectedTextRange一变又会改掉UIFieldEdito的偏移量
+         */
+        //向右边选择文字会出现field不会自动右移的情况
+        
+        NSString *selectedStr2BeginOfDocument = [self.textField textInRange:[self.textField textRangeFromPosition:self.textField.beginningOfDocument
+                                                                                                       toPosition:targetPosition]];
+//        NSLog(@"选中的文字是:\n%@",selectedStr2BeginOfDocument);
+        CGSize strSize = [selectedStr2BeginOfDocument sizeWithAttributes:@{NSFontAttributeName:self.textField.font}];
+        
+        UIScrollView *theUIFieldEditorContentView;
+        for (id i in self.textField.subviews)
+        {
+            if ([i class] == NSClassFromString(@"UIFieldEditor")) {
+                theUIFieldEditorContentView = i;
+            }
         }
+        CGFloat offsetX = (strSize.width - theUIFieldEditorContentView.frame.size.width)>0?strSize.width - theUIFieldEditorContentView.frame.size.width:0;
+        theUIFieldEditorContentView.contentOffset =CGPointMake(offsetX,0);
     }
-    NSLog(@"展示的文字view的contentOffset%@",NSStringFromCGPoint(theUIFieldEditorContentView.contentOffset));
-    CGFloat offsetX = (strSize.width - theUIFieldEditorContentView.frame.size.width)>0?strSize.width - theUIFieldEditorContentView.frame.size.width:0;
-    theUIFieldEditorContentView.contentOffset =CGPointMake(offsetX,
-                                                           0);
-
-    
 }
 
 #pragma mark DoubleTap手势
@@ -320,6 +437,7 @@ static float num4log = 1.2;
 static int num4Increase = 1;
 - (void)makeOffsetAutoIncreaseLeft
 {
+    NSLog(@"正在自动左移");
     if (self.square.frame.origin.x<=self.slideBar.frame.origin.x) {
         increasement4Offset += num4Increase;
         [self makeOffset:-(int)(log(increasement4Offset)/log(num4log)) onTextField:self.textField];
@@ -333,6 +451,7 @@ static int num4Increase = 1;
 }
 - (void)makeOffsetAutoIncreaseRight
 {
+    NSLog(@"正在自动右移");
     if (self.square.frame.origin.x>self.slideBar.frame.size.width - self.square.frame.size.width) {
         increasement4Offset += num4Increase;
         [self makeOffset:(int)(log(increasement4Offset)/log(num4log)) onTextField:self.textField];

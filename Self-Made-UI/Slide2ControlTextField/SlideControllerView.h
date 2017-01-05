@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SlideControllerView : UIView
-@property (nonatomic, strong)UIView *aSquare;
-@property (nonatomic, strong)UIView *aSlideBar;
+@property (nonatomic, strong)UIView *square;
+@property (nonatomic, strong)UIView *slideBar;
 @property (nonatomic, strong)UITextField *targetTextField;
 - (instancetype)initWithFrame:(CGRect)frame andTheTargetTextField:(UITextField *)aTextField;
 @end

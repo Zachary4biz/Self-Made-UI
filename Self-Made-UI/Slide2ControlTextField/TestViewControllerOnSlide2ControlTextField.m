@@ -19,14 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UITextField *aTextField = [[UITextField alloc]initWithFrame:CGRectMake(20, 80, 200, 30)];
+    aTextField.text = @"开始--as;dlkfjasova;ls大；厉害；看看几率爱对方感到父kjadls;fjiofqwet看几率爱对方感到父kjadls;fjiof看几率爱对方感到父kjadls;fjiof看几率爱对方感到父kjadls;fjiof看几率爱对方感到父kjadls;fjiof看几率爱对方感到父kjadls;fjiof看几率爱对方感到父kjadls;fjiof--结束";
     [aTextField setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:aTextField];
-    SlideControllerView *theControlView = [[SlideControllerView alloc]initWithFrame:CGRectMake(30, 200, 300, 15) andTheTargetTextField:aTextField];
+    SlideControllerView *theControlView = [[SlideControllerView alloc]initWithFrame:CGRectMake(30, 200, 300, 25) andTheTargetTextField:aTextField];
     [self.view addSubview:theControlView];
-    
-    WKWebView *aWebView = [[WKWebView alloc]initWithFrame:self.view.bounds];
-    aWebView.scrollView.delegate = self;
-    [self.view addSubview:aWebView];
+
     
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -35,13 +35,13 @@
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="C0N-yA-afV"/>
-                                <constraint firstAttribute="width" constant="60" id="cNQ-al-Cde"/>
+                                <constraint firstAttribute="width" constant="15" id="cNQ-al-Cde"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="303" id="3EU-sV-RGT"/>
+                        <constraint firstAttribute="width" constant="290" id="3EU-sV-RGT"/>
                         <constraint firstItem="2Gc-0L-vph" firstAttribute="centerY" secondItem="f9F-Hm-3wV" secondAttribute="centerY" id="8N0-FJ-ONg"/>
                         <constraint firstItem="2Gc-0L-vph" firstAttribute="centerX" secondItem="f9F-Hm-3wV" secondAttribute="centerX" id="AaT-5X-cb7"/>
                         <constraint firstItem="yeO-ID-ad9" firstAttribute="centerX" secondItem="f9F-Hm-3wV" secondAttribute="centerX" id="HPf-bi-8tX"/>
