@@ -10,6 +10,7 @@
 #import "MyTabBarController.h"
 #import "TestViewControllerOnSlide2ControlTextField.h"
 #import "TextViewViewController.h"
+#import "CollectionViewDemoViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -27,8 +28,9 @@
     //2.指定根控制器
 //    self.window.rootViewController = [[MyTabBarController alloc]init];
 //    self.window.rootViewController = [[TestViewControllerOnSlide2ControlTextField alloc]init];
-    self.window.rootViewController = [[TextViewViewController alloc]init];
-    
+//    self.window.rootViewController = [[TextViewViewController alloc]init];
+    self.window.rootViewController = [[CollectionViewDemoViewController alloc]init];
+
     [self.window makeKeyAndVisible];
     
     return YES;

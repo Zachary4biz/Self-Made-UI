@@ -28,6 +28,11 @@
 		B68FC6471D99158A00822473 /* RopinessPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = B68FC6461D99158A00822473 /* RopinessPointView.m */; };
 		B68FC64F1D99694200822473 /* ScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = B68FC64E1D99694200822473 /* ScreenShot.m */; };
 		B6A884A51E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */; };
+		B6A9EFEC1E1DFCA7000D0ABA /* CollectionViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A9EFEB1E1DFCA7000D0ABA /* CollectionViewDemoViewController.m */; };
+		B6A9EFEF1E1DFCEE000D0ABA /* VerticalCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A9EFEE1E1DFCEE000D0ABA /* VerticalCollectionView.m */; };
+		B6A9EFF21E1DFD2B000D0ABA /* VerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A9EFF11E1DFD2B000D0ABA /* VerticalFlowLayout.m */; };
+		B6A9EFF51E1DFD57000D0ABA /* HorizontalScaleCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A9EFF41E1DFD57000D0ABA /* HorizontalScaleCollectionView.m */; };
+		B6A9EFF81E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A9EFF71E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.m */; };
 		B6E5C8F21E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F11E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m */; };
 		B6E5C8F51E14136F004F8635 /* SlideControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F41E14136F004F8635 /* SlideControllerView.m */; };
 		B6E5C8F91E14B195004F8635 /* TextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E5C8F71E14B195004F8635 /* TextViewViewController.m */; };
@@ -41,9 +46,6 @@
 		B6EA7E061DD15E9100EBDF72 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA7E041DD15E9100EBDF72 /* SecondViewController.m */; };
 		B6EA7E071DD15E9100EBDF72 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EA7E051DD15E9100EBDF72 /* SecondViewController.xib */; };
 		B6EA7E0A1DD15ECD00EBDF72 /* TransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EA7E091DD15ECD00EBDF72 /* TransitionManager.m */; };
-		B6EEE7C01DAFC6810045C8C8 /* AlbumLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EEE7BF1DAFC6810045C8C8 /* AlbumLayout.m */; };
-		B6EEE7C31DAFC6980045C8C8 /* AlbumFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EEE7C21DAFC6980045C8C8 /* AlbumFlowLayout.m */; };
-		B6EEE7C91DAFC76C0045C8C8 /* AlbumCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EEE7C81DAFC76C0045C8C8 /* AlbumCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,16 @@
 		B68FC64E1D99694200822473 /* ScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenShot.m; sourceTree = "<group>"; };
 		B6A884A31E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixChineseCharacterOffsetTextField.h; sourceTree = "<group>"; };
 		B6A884A41E1B44D900C5F98A /* FixChineseCharacterOffsetTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixChineseCharacterOffsetTextField.m; sourceTree = "<group>"; };
+		B6A9EFEA1E1DFCA7000D0ABA /* CollectionViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewDemoViewController.h; sourceTree = "<group>"; };
+		B6A9EFEB1E1DFCA7000D0ABA /* CollectionViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewDemoViewController.m; sourceTree = "<group>"; };
+		B6A9EFED1E1DFCEE000D0ABA /* VerticalCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalCollectionView.h; sourceTree = "<group>"; };
+		B6A9EFEE1E1DFCEE000D0ABA /* VerticalCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalCollectionView.m; sourceTree = "<group>"; };
+		B6A9EFF01E1DFD2B000D0ABA /* VerticalFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalFlowLayout.h; sourceTree = "<group>"; };
+		B6A9EFF11E1DFD2B000D0ABA /* VerticalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalFlowLayout.m; sourceTree = "<group>"; };
+		B6A9EFF31E1DFD57000D0ABA /* HorizontalScaleCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalScaleCollectionView.h; sourceTree = "<group>"; };
+		B6A9EFF41E1DFD57000D0ABA /* HorizontalScaleCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalScaleCollectionView.m; sourceTree = "<group>"; };
+		B6A9EFF61E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalScaleFlowLayout.h; sourceTree = "<group>"; };
+		B6A9EFF71E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalScaleFlowLayout.m; sourceTree = "<group>"; };
 		B6E5C8F01E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewControllerOnSlide2ControlTextField.h; sourceTree = "<group>"; };
 		B6E5C8F11E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewControllerOnSlide2ControlTextField.m; sourceTree = "<group>"; };
 		B6E5C8F31E14136F004F8635 /* SlideControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideControllerView.h; sourceTree = "<group>"; };
@@ -106,12 +118,6 @@
 		B6EA7E051DD15E9100EBDF72 /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
 		B6EA7E081DD15ECD00EBDF72 /* TransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionManager.h; sourceTree = "<group>"; };
 		B6EA7E091DD15ECD00EBDF72 /* TransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionManager.m; sourceTree = "<group>"; };
-		B6EEE7BE1DAFC6810045C8C8 /* AlbumLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumLayout.h; sourceTree = "<group>"; };
-		B6EEE7BF1DAFC6810045C8C8 /* AlbumLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumLayout.m; sourceTree = "<group>"; };
-		B6EEE7C11DAFC6980045C8C8 /* AlbumFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumFlowLayout.h; sourceTree = "<group>"; };
-		B6EEE7C21DAFC6980045C8C8 /* AlbumFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumFlowLayout.m; sourceTree = "<group>"; };
-		B6EEE7C71DAFC76C0045C8C8 /* AlbumCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewController.h; sourceTree = "<group>"; };
-		B6EEE7C81DAFC76C0045C8C8 /* AlbumCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,10 +159,10 @@
 		B68FC5E71D94D46700822473 /* Self-Made-UI */ = {
 			isa = PBXGroup;
 			children = (
+				B6A9EFE91E1DFB9B000D0ABA /* CollectionViewDemos */,
 				B6E5C8EE1E140CD9004F8635 /* Slide2ControlTextField */,
 				B6E780CD1E15027000C37950 /* 键盘控制 */,
 				B63BDFAB1DF124850086778F /* AutoHeightTextView */,
-				B6EEE7BA1DAFC6450045C8C8 /* AlbumCollectionView */,
 				B6E7F2D51DA9316C00BBCA14 /* LoadingView */,
 				B68FC64C1D99694200822473 /* Screenshot */,
 				B68FC6411D990FC200822473 /* TabBar */,
@@ -268,6 +274,39 @@
 			path = Screenshot;
 			sourceTree = "<group>";
 		};
+		B6A9EFE91E1DFB9B000D0ABA /* CollectionViewDemos */ = {
+			isa = PBXGroup;
+			children = (
+				B6A9EFEA1E1DFCA7000D0ABA /* CollectionViewDemoViewController.h */,
+				B6A9EFEB1E1DFCA7000D0ABA /* CollectionViewDemoViewController.m */,
+				B6A9EFFA1E1DFD80000D0ABA /* 竖直方向浏览器Tab效果 */,
+				B6A9EFF91E1DFD73000D0ABA /* 水平方向缩放效果 */,
+			);
+			path = CollectionViewDemos;
+			sourceTree = "<group>";
+		};
+		B6A9EFF91E1DFD73000D0ABA /* 水平方向缩放效果 */ = {
+			isa = PBXGroup;
+			children = (
+				B6A9EFF31E1DFD57000D0ABA /* HorizontalScaleCollectionView.h */,
+				B6A9EFF41E1DFD57000D0ABA /* HorizontalScaleCollectionView.m */,
+				B6A9EFF61E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.h */,
+				B6A9EFF71E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.m */,
+			);
+			name = "水平方向缩放效果";
+			sourceTree = "<group>";
+		};
+		B6A9EFFA1E1DFD80000D0ABA /* 竖直方向浏览器Tab效果 */ = {
+			isa = PBXGroup;
+			children = (
+				B6A9EFED1E1DFCEE000D0ABA /* VerticalCollectionView.h */,
+				B6A9EFEE1E1DFCEE000D0ABA /* VerticalCollectionView.m */,
+				B6A9EFF01E1DFD2B000D0ABA /* VerticalFlowLayout.h */,
+				B6A9EFF11E1DFD2B000D0ABA /* VerticalFlowLayout.m */,
+			);
+			name = "竖直方向浏览器Tab效果";
+			sourceTree = "<group>";
+		};
 		B6E5C8EE1E140CD9004F8635 /* Slide2ControlTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,19 +364,6 @@
 				B6EA7E091DD15ECD00EBDF72 /* TransitionManager.m */,
 			);
 			path = Transition2;
-			sourceTree = "<group>";
-		};
-		B6EEE7BA1DAFC6450045C8C8 /* AlbumCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				B6EEE7BE1DAFC6810045C8C8 /* AlbumLayout.h */,
-				B6EEE7BF1DAFC6810045C8C8 /* AlbumLayout.m */,
-				B6EEE7C11DAFC6980045C8C8 /* AlbumFlowLayout.h */,
-				B6EEE7C21DAFC6980045C8C8 /* AlbumFlowLayout.m */,
-				B6EEE7C71DAFC76C0045C8C8 /* AlbumCollectionViewController.h */,
-				B6EEE7C81DAFC76C0045C8C8 /* AlbumCollectionViewController.m */,
-			);
-			path = AlbumCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,23 +452,25 @@
 				B68FC6031D94D47700822473 /* DownloadProgressView.m in Sources */,
 				B6EA7DFB1DD15E3E00EBDF72 /* SwitchScrollViewViewController.m in Sources */,
 				B68FC6311D981F3800822473 /* SelfMadeTableView.m in Sources */,
+				B6A9EFF21E1DFD2B000D0ABA /* VerticalFlowLayout.m in Sources */,
 				B6EA7E011DD15E8600EBDF72 /* FirstViewController.m in Sources */,
 				B68FC5ED1D94D46700822473 /* AppDelegate.m in Sources */,
 				B6E7F2D81DA9320500BBCA14 /* HourGlassLoadingView.m in Sources */,
 				B68FC64F1D99694200822473 /* ScreenShot.m in Sources */,
+				B6A9EFF81E1DFD6C000D0ABA /* HorizontalScaleFlowLayout.m in Sources */,
 				B62A04251D9E928600DCE7D3 /* MyTabBarController.m in Sources */,
 				B6EA7E0A1DD15ECD00EBDF72 /* TransitionManager.m in Sources */,
 				B68FC6441D990FDD00822473 /* TabBar.m in Sources */,
+				B6A9EFF51E1DFD57000D0ABA /* HorizontalScaleCollectionView.m in Sources */,
 				B62A04221D9B625100DCE7D3 /* FlyPoint.m in Sources */,
 				B68FC63E1D98CC7300822473 /* RoundIconView.m in Sources */,
-				B6EEE7C01DAFC6810045C8C8 /* AlbumLayout.m in Sources */,
 				B6E5C8F21E140D11004F8635 /* TestViewControllerOnSlide2ControlTextField.m in Sources */,
 				B6E5C8F51E14136F004F8635 /* SlideControllerView.m in Sources */,
 				B68FC5EA1D94D46700822473 /* main.m in Sources */,
-				B6EEE7C91DAFC76C0045C8C8 /* AlbumCollectionViewController.m in Sources */,
 				B68FC6471D99158A00822473 /* RopinessPointView.m in Sources */,
+				B6A9EFEF1E1DFCEE000D0ABA /* VerticalCollectionView.m in Sources */,
+				B6A9EFEC1E1DFCA7000D0ABA /* CollectionViewDemoViewController.m in Sources */,
 				B6E5C8F91E14B195004F8635 /* TextViewViewController.m in Sources */,
-				B6EEE7C31DAFC6980045C8C8 /* AlbumFlowLayout.m in Sources */,
 				B63BDFAE1DF1249C0086778F /* AutoHeightTextView.m in Sources */,
 				B68FC60A1D94EE1700822473 /* PieChartView.m in Sources */,
 				B68FC60F1D95057700822473 /* loadingView.m in Sources */,

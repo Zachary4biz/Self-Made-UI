@@ -9,7 +9,7 @@
 #import "MyTabBarController.h"
 #import "ViewController.h"
 #import "SwitchScrollViewViewController.h"
-#import "AlbumCollectionViewController.h"
+
 #import "FirstViewController.h"
 @interface MyTabBarController ()<UIScrollViewDelegate>
 
@@ -27,7 +27,6 @@
     UIViewController *VC4UIAnimation = [storyboard instantiateInitialViewController];
     [self createChildVC:VC4UIAnimation title:@"UIAnimation" imageName:@"1_gray" selectedImageName:@"1"];
     [self createChildVC:[[SwitchScrollViewViewController alloc]init] title:@"Transition" imageName:@"2_gray" selectedImageName:@"2"];
-    [self createChildVC:[[AlbumCollectionViewController alloc]init] title:@"Album" imageName:@"2_gray" selectedImageName:@"2"];
     [self createChildVC:[[FirstViewController alloc]init] title:@"Transition2" imageName:@"2_gray" selectedImageName:@"2"];
     //设置attributes
     [self setUpAttributes];

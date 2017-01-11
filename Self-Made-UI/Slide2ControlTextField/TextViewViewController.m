@@ -152,10 +152,15 @@ static CGFloat recorder4MaxRightTransformX = 0;
         NSLog(@"self.square.frame -- %@",NSStringFromCGRect(self.square.frame));
         CGPoint gesturePoint = [aLongPress locationInView:self.slideBar];
         NSLog(@"gesturePoint-longPress-location- %@",NSStringFromCGPoint(gesturePoint));
+        
         //当前选中的offset
         NSInteger currentSelectedOffset = [self.textField offsetFromPosition:self.textField.selectedTextRange.start toPosition:self.textField.selectedTextRange.end];
         NSLog(@"当前选中量是%ld",currentSelectedOffset);
         if (gesturePoint.x>0+0.5*self.square.frame.size.width && gesturePoint.x<self.slideBar.frame.size.width-0.5*self.square.frame.size.width) {
+            /*
+             *这里transform之后，center.x虽然没有改变，但是根据实际位置的计算，
+             *square的中心self.square.frame.origin.x+0.5*self.square.frame等于手势点的位置
+             */
             self.square.transform = CGAffineTransformMakeTranslation(gesturePoint.x-self.square.center.x, 0);
             //将要发生的offset（来自滑块的位移），要判断一下是直接使用还是加上当前选中的offset后再用
             NSInteger willOffset = self.square.transform.tx;
