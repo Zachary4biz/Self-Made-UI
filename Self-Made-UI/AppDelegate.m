@@ -11,6 +11,7 @@
 #import "TestViewControllerOnSlide2ControlTextField.h"
 #import "TextViewViewController.h"
 #import "CollectionViewDemoViewController.h"
+#import "SlideTabViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -29,7 +30,8 @@
 //    self.window.rootViewController = [[MyTabBarController alloc]init];
 //    self.window.rootViewController = [[TestViewControllerOnSlide2ControlTextField alloc]init];
 //    self.window.rootViewController = [[TextViewViewController alloc]init];
-    self.window.rootViewController = [[CollectionViewDemoViewController alloc]init];
+//    self.window.rootViewController = [[CollectionViewDemoViewController alloc]init];
+    self.window.rootViewController = [[SlideTabViewController alloc]init];
 
     [self.window makeKeyAndVisible];
     
